@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="CareerTrack helps students discover jobs, save opportunities, track applications, and prepare for placements.">
+  <title>CareerTrack — Your Career, Organized</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="#dashboard" aria-label="CareerTrack home"><span class="brand-mark">C</span><span>Career<span
+          class="brand-accent">Track</span></span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <nav id="mainNav">
+      <a href="#dashboard" class="nav-link active" data-page="dashboard">Dashboard</a>
+      <a href="#jobs" class="nav-link" data-page="jobs">Find Jobs</a>
+      <a href="#saved" class="nav-link" data-page="saved">Saved Jobs <span class="nav-count"
+          id="navSavedCount">0</span></a>
+      <a href="#applications" class="nav-link" data-page="applications">Applications</a>
+      <a href="#prep" class="nav-link" data-page="prep">Placement Prep</a>
+    </nav>
+    <div class="profile-chip"><span class="avatar">N</span><span class="profile-name">Student</span></div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="welcomeHero">
+      <div>
+        <p class="eyebrow">YOUR NEXT OPPORTUNITY STARTS HERE</p>
+        <h1>Build your future,<br><span>one step at a time.</span></h1>
+        <p class="hero-copy">Find opportunities, organize applications, and keep your placement preparation on track.
+        </p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#jobs">Explore jobs <span>→</span></a><a
+            class="btn btn-ghost" href="#prep">Continue preparation</a></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="art-card"><span class="art-icon">↗</span>
+          <p>Career progress</p><strong>Keep moving forward</strong>
+          <div class="progress-track"><span></span></div><small>Small steps. Big outcomes.</small>
+        </div>
+        <div class="floating-tag">✦ Your journey</div>
+      </div>
+    </section>
+
+    <section class="page-section" id="dashboard">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">OVERVIEW</p>
+          <h2>Your career dashboard</h2>
+          <p class="muted">A quick look at your job search progress.</p>
+        </div><span class="today-pill" id="todayLabel">Let's make progress</span>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon purple">⌕</div>
+          <p>Total opportunities</p><strong id="totalJobsStat">0</strong><small>Available in this demo</small>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon blue">♡</div>
+          <p>Saved jobs</p><strong id="savedJobsStat">0</strong><small>Keep your shortlist handy</small>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon orange">▤</div>
+          <p>Applications</p><strong id="applicationStat">0</strong><small>Opportunities you're tracking</small>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon green">✓</div>
+          <p>Interview stage</p><strong id="interviewStat">0</strong><small>Applications at interview</small>
+        </article>
+      </div>
+      <div class="dashboard-grid">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Recent opportunities</h3>
+              <p class="muted">Explore roles selected for students.</p>
+            </div><a href="#jobs" class="text-link">View all →</a>
+          </div>
+          <div id="dashboardJobs" class="compact-job-list"></div>
+        </article>
+        <article class="panel progress-panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Your placement checklist</h3>
+              <p class="muted">Track the essentials.</p>
+            </div>
+          </div>
+          <div class="checklist" id="dashboardChecklist">
+            <label><input type="checkbox" data-check="resume"> <span><b>Update your resume</b><small>Keep your latest
+                  projects ready.</small></span></label>
+            <label><input type="checkbox" data-check="github"> <span><b>Polish your GitHub</b><small>Pin your best
+                  project repositories.</small></span></label>
+            <label><input type="checkbox" data-check="dsa"> <span><b>Practice DSA today</b><small>Solve at least one
+                  problem.</small></span></label>
+            <label><input type="checkbox" data-check="interview"> <span><b>Revise interview basics</b><small>Practice
+                  explaining your projects.</small></span></label>
+          </div>
+          <div class="check-progress">
+            <div class="progress-track"><span id="checkProgressBar"></span></div><small id="checkProgressText">0 of 4
+              completed</small>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="page-section" id="jobs">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">DISCOVER</p>
+          <h2>Find your next opportunity</h2>
+          <p class="muted">Search, filter, and shortlist jobs or internships.</p>
+        </div>
+      </div>
+      <div class="filter-panel">
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search"
+            placeholder="Search role, company, or skill..." aria-label="Search jobs"></div>
+        <select id="jobTypeFilter" aria-label="Filter by job type">
+          <option value="All">All types</option>
+          <option value="Internship">Internship</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Remote">Remote</option>
+        </select>
+        <select id="locationFilter" aria-label="Filter by location">
+          <option value="All">All locations</option>
+          <option value="Remote">Remote</option>
+          <option value="Bengaluru">Bengaluru</option>
+          <option value="Delhi NCR">Delhi NCR</option>
+          <option value="Hyderabad">Hyderabad</option>
+          <option value="Pune">Pune</option>
+        </select>
+        <select id="experienceFilter" aria-label="Filter by experience">
+          <option value="All">Any experience</option>
+          <option value="Fresher">Fresher</option>
+          <option value="0-1 year">0–1 year</option>
+          <option value="1-2 years">1–2 years</option>
+        </select>
+      </div>
+      <div class="results-row">
+        <p id="jobCount">Showing opportunities</p><button class="clear-btn" id="clearFilters">Clear filters</button>
+      </div>
+      <div class="jobs-grid" id="jobList"></div>
+      <p class="disclaimer">Demo data only. Verify openings and application details on the employer's official careers
+        page before applying.</p>
+    </section>
+
+    <section class="page-section" id="saved">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">YOUR SHORTLIST</p>
+          <h2>Saved jobs</h2>
+          <p class="muted">Opportunities you want to revisit.</p>
+        </div><span class="count-pill" id="savedCount">0 saved</span>
+      </div>
+      <div class="jobs-grid" id="savedJobsList"></div>
+      <div class="empty-state hidden" id="savedEmpty">
+        <div class="empty-icon">♡</div>
+        <h3>No saved jobs yet</h3>
+        <p>Save interesting roles from Find Jobs and they will appear here.</p><a class="btn btn-primary"
+          href="#jobs">Browse opportunities</a>
+      </div>
+    </section>
+
+    <section class="page-section" id="applications">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">STAY ORGANIZED</p>
+          <h2>Application tracker</h2>
+          <p class="muted">Record where you've applied and what happens next.</p>
+        </div>
+      </div>
+      <form id="applicationForm" class="panel application-form">
+        <h3>Add an application</h3>
+        <div class="form-grid"><label>Role / job title<input id="appRole" required maxlength="80"
+              placeholder="e.g. Frontend Developer Intern"></label><label>Company<input id="appCompany" required
+              maxlength="80" placeholder="e.g. Example Tech"></label><label>Application status<select id="appStatus">
+              <option>Applied</option>
+              <option>Assessment</option>
+              <option>Interview</option>
+              <option>Offer</option>
+              <option>Rejected</option>
+            </select></label><label>Applied on<input id="appDate" type="date" required></label></div>
+        <label class="full-label">Notes (optional)<textarea id="appNotes" rows="2" maxlength="300"
+            placeholder="Recruiter details, next steps, or preparation notes"></textarea></label>
+        <button class="btn btn-primary" type="submit">+ Add application</button>
+      </form>
+      <div class="results-row">
+        <p id="applicationCount">0 applications</p><select id="applicationStatusFilter"
+          aria-label="Filter applications">
+          <option value="All">All statuses</option>
+          <option>Applied</option>
+          <option>Assessment</option>
+          <option>Interview</option>
+          <option>Offer</option>
+          <option>Rejected</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Role & company</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Notes</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="applicationList"></tbody>
+        </table>
+      </div>
+      <div class="empty-state hidden" id="applicationsEmpty">
+        <div class="empty-icon">▤</div>
+        <h3>No applications tracked</h3>
+        <p>Add an application above after you apply for a role.</p>
+      </div>
+    </section>
+
+    <section class="page-section" id="prep">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PREPARE WITH PURPOSE</p>
+          <h2>Placement prep corner</h2>
+          <p class="muted">A starter plan for consistent daily practice.</p>
+        </div>
+      </div>
+      <div class="prep-grid">
+        <article class="prep-card">
+          <div class="prep-symbol purple">⌘</div><span class="prep-tag">CODING</span>
+          <h3>DSA practice</h3>
+          <p>Build problem-solving skills with arrays, strings, hashing, sorting, and basic trees.</p>
+          <ul>
+            <li>Choose one problem a day</li>
+            <li>Explain brute force first</li>
+            <li>Review time complexity</li>
+          </ul><a href="https://leetcode.com/" target="_blank" rel="noreferrer" class="text-link">Practice on LeetCode
+            ↗</a>
+        </article>
+        <article class="prep-card">
+          <div class="prep-symbol blue">⌁</div><span class="prep-tag">WEB DEVELOPMENT</span>
+          <h3>Build CareerTrack</h3>
+          <p>Turn this starter website into a full-stack portfolio project, one feature at a time.</p>
+          <ul>
+            <li>JavaScript fundamentals</li>
+            <li>React components and forms</li>
+            <li>Node.js API and database</li>
+          </ul><a href="https://developer.mozilla.org/" target="_blank" rel="noreferrer" class="text-link">Learn web
+            development ↗</a>
+        </article>
+        <article class="prep-card">
+          <div class="prep-symbol orange">✦</div><span class="prep-tag">INTERVIEWS</span>
+          <h3>Interview readiness</h3>
+          <p>Practice telling a clear story about your work, decisions, and lessons learned.</p>
+          <ul>
+            <li>Prepare your introduction</li>
+            <li>Explain one project deeply</li>
+            <li>Practice behavioral questions</li>
+          </ul><a href="https://www.geeksforgeeks.org/" target="_blank" rel="noreferrer" class="text-link">Explore
+            interview resources ↗</a>
+        </article>
+      </div>
+      <div class="panel weekly-panel">
+        <div>
+          <p class="eyebrow">WEEKLY TARGET</p>
+          <h3>Consistency beats cramming.</h3>
+          <p class="muted">Mark the tasks you finish. Your progress is saved in this browser.</p>
+        </div>
+        <div class="weekly-days" id="weeklyDays"></div>
+      </div>
+    </section>
+
+    <footer><a class="brand footer-brand" href="#dashboard"><span class="brand-mark">C</span><span>Career<span
+            class="brand-accent">Track</span></span></a>
+      <p>Made to help students move from learning to landing opportunities.</p><span>CareerTrack demo · Your data stays
+        in this browser</span>
+    </footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+
+</html>
